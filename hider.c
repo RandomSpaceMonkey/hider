@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     u_int8_t header[HEADER_LENGTH];
     int read_bytes = fread(header, 1, HEADER_LENGTH, png_file);
     if (read_bytes != HEADER_LENGTH) {
-        printf("Cannot read file header\n");
+        printf("ERROR: Cannot read file header\n");
         return 1;
     }
 
