@@ -26,14 +26,38 @@ int check_header(int8_t header[]) {
     }
 }
 
-int main(int argc, char** argv) {
+int check_args(int argc, char ** argv) {
+
+    char usg_string[] = "USAGE: ./hider [encode/decode] {filname.png}\n";
 
     if (argc == 1) {
-        printf("USAGE: ./hider {filname.png}\n");
+        printf("%s", usg_string);
         return 1;
     }
 
-    FILE * png_file = fopen(argv[1], "rb");
+    if (argc != 3) {
+        printf("ERROR: Invalid amount of arguments supplied\n");
+        printf("%s", usg_string);
+        return 1;
+    }
+
+    if (! (strcmp("encode", argv[1]) || strcmp("decode", argv[1])) ) {
+        printf("ERROR: Invalid arg: %s, must be encode or decode\n", argv[1]);
+        printf("%s", usg_string);
+        return 1;
+    }
+
+    return 0;
+
+}
+
+int main(int argc, char** argv) {
+
+    if (check_args(argc, argv)) {
+        return 1;
+    }
+
+    FILE * png_file = fopen(argv[2], "rb");
     if (png_file == NULL) {
         printf("ERROR: Cannot open %s\n", argv[1]);
         printf("%s\n", strerror(errno));

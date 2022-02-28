@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc hider.c -o hider && ./hider linux.png
+gcc hider.c -o hider && ./hider encode linux.png
